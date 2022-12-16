@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Project 17 - Driven Course",
-  "main": "/src/server.js",
+  "main": "server.js",
   "scripts": {
     "dev": "npx nodemon src/server.js",
     "start": "node src/server.js",
