@@ -3,15 +3,13 @@ import { nanoid } from "nanoid";
 
 export const postUrl = async (req, res) => {
   const { url } = req.body;
-  const token = req.token;
+  const sessionId = req.sessionId
   const shortUrl = nanoid(6);
 
   try {
-    const session =  (await connectionDB.query(`SELECT * FROM sessions WHERE token=$1`, [token])).rows[0]
-
     await connectionDB.query(
       `INSERT INTO urls ("shortUrl", url, "sessionId") VALUES ($1, $2, $3)`,
-      [shortUrl, url, session.id]
+      [shortUrl, url, sessionId]
     );
     res.status(200).send(shortUrl);
   } catch (error) {
