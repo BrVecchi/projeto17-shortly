@@ -6,7 +6,7 @@ export const signIn = async (req, res) => {
   const token = uuidV4();
 
   try {
-    await connectionDB.query(`INSERT INTO sessions (token, "userId", name) VALUES ($1, $2, $3)`, [token, userValidation.id, userValidation.name]);
+    await connectionDB.query(`INSERT INTO sessions (token, "userId") VALUES ($1, $2)`, [token, userValidation.id]);
     res.status(200).send(token);
   } catch (error) {
     console.log(error);
