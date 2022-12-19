@@ -8,9 +8,10 @@ import { userSchemaValidation } from "../middlewares/userSchemaMiddleware.js";
 import { userValidationMiddleware } from "../middlewares/userValidationMiddleware.js";
 
 
-const router = Router();
+export const authRouter = Router();
 
-router.post("/signup",userSchemaValidation, emailValidationMiddleware, signUp);
-router.post("/signin",signInSchemaValidation, userValidationMiddleware, passwordValidationMiddleware, signIn);
+authRouter.post("/signup",userSchemaValidation, emailValidationMiddleware, signUp);
+authRouter.post("/signin",signInSchemaValidation, userValidationMiddleware, passwordValidationMiddleware, signIn);
 
-export default router;
+
+
