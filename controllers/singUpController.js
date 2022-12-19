@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { connectionDB } from "../database/db";
+import { connectionDB } from "../database/db.js";
 
 export const signUp = async (req, res) => {
   const {name, email, password, confirmPassword} = req.body;
