@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from "uuid";
-import { connectionDB } from "../database/db";
+import { connectionDB } from "../database/db.js";
 
 export const signIn = async (req, res) => {
   const userValidation = req.userValidation
