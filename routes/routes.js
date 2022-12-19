@@ -5,7 +5,7 @@ import { userValidationMiddleware } from "../middlewares/userValidationMiddlewar
 
 const router = Router();
 
-router.post("signup", signUp)
-router.post("signin",userValidationMiddleware, signIn)
+router.post("/signup", signUp)
+router.post("/signin",userValidationMiddleware, signIn)
 
 export default router;
