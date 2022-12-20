@@ -70,12 +70,15 @@ export async function redirectUrl(req, res) {
 }
 
 export async function deleteUrl(req, res) {
-  const { id } = req.params;
+  const urlValidation = req.urlValidation
   const token = req.token;
+  const {id} = req.params
 
   try {
-     const userIdByUrl = (await connectionDB.query(`SELECT * FROM urls WHERE "userId"=$1;`, [id])).rows[0].id;
-     const userIdBySession = (await connectionDB.query(`SELECT * FROM sessions WHERE token=$1;`, [token])).rows[0].id;
+     const userIdByUrl = urlValidation.userId
+     const userIdBySession = (await connectionDB.query(`SELECT "userId" FROM sessions WHERE token=$1;`, [token])).rows[0].userId;
+     console.log(userIdBySession)
+     console.log(userIdByUrl)
     if (userIdBySession!==userIdByUrl) {
       res.sendStatus(401);
       return
