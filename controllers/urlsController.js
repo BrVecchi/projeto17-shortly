@@ -57,7 +57,7 @@ export async function redirectUrl(req, res) {
       return
     }
     const visitUpdated = url.visitCount + 1;
-    console.log(visitUpdated);
+
     await connectionDB.query(
       `UPDATE urls SET "visitCount"=$1 WHERE "shortUrl"=$2`,
       [visitUpdated, shortUrl]
@@ -65,6 +65,7 @@ export async function redirectUrl(req, res) {
     const urlToRedirect = url.url;
     res.redirect(urlToRedirect);
   } catch (error) {
+    console.log(error);
     res.status(500).send(error.message);
   }
 }
@@ -77,8 +78,7 @@ export async function deleteUrl(req, res) {
   try {
      const userIdByUrl = urlValidation.userId
      const userIdBySession = (await connectionDB.query(`SELECT "userId" FROM sessions WHERE token=$1;`, [token])).rows[0].userId;
-     console.log(userIdBySession)
-     console.log(userIdByUrl)
+
     if (userIdBySession!==userIdByUrl) {
       res.sendStatus(401);
       return
@@ -87,6 +87,7 @@ export async function deleteUrl(req, res) {
     await connectionDB.query(`DELETE FROM urls WHERE id=$1`, [id]);
     res.sendStatus(204);
   } catch (error) {
+    console.log(error);
     res.status(500).send(error.message);
   }
 }
