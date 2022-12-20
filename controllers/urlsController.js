@@ -47,12 +47,20 @@ export async function redirectUrl(req, res) {
 
   try {
     const url = (
-      await connectionDB.query(`SELECT * FROM urls WHERE "shortUrl"=$1;`, [shortUrl])
+      await connectionDB.query(`SELECT * FROM urls WHERE "shortUrl"=$1;`, [
+        shortUrl,
+      ])
     ).rows[0];
     if (!url) {
       res.sendStatus(404);
     }
-    const urlToRedirect = url.url
+    const visitUpdated = url.visitCount + 1;
+    console.log(visitUpdated);
+    await connectionDB.query(
+      `UPDATE urls SET "visitCount"=$1 WHERE "shortUrl"=$2`,
+      [visitUpdated, shortUrl]
+    );
+    const urlToRedirect = url.url;
     res.redirect(urlToRedirect);
   } catch (error) {
     res.status(500).send(error.message);
