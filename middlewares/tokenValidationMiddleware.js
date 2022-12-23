@@ -10,8 +10,6 @@ export const tokenMiddleware = async (req, res, next) => {
     }
      try {
         const availableTokens = (await connectionDB.query(`SELECT token FROM sessions;`)).rows.map(ta => ta.token)
-        console.log(availableTokens)
-        console.log(token)
         if (!availableTokens.includes(`${token}`)) {
             return res.sendStatus(401);
         }
