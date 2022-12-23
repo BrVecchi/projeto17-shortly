@@ -10,4 +10,3 @@ urlsRouter.post("/urls/shorten", tokenMiddleware, urlSchemaValidation, postUrl);
 urlsRouter.get("/urls/:id", findUrlById);
 urlsRouter.get("/urls/open/:shortUrl", redirectUrl);
 urlsRouter.delete("/urls/:id",tokenMiddleware, urlValidationMiddleware, deleteUrl);
-
