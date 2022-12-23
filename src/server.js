@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { urlsRouter } from "../routes/urlsRoutes.js";
 import { usersRouter } from "../routes/usersRoutes.js";
+import { rankingRouter } from "../routes/rankingRoutes.js";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(authRouter);
 app.use(urlsRouter);
 app.use(usersRouter);
+app.use(rankingRouter);
 const port = process.env.PORT;
 
 app.listen(port, () => console.log(`Está rodando na porta ${port}!`));
