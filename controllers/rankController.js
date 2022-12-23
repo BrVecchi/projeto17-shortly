@@ -19,11 +19,7 @@ export async function getRanking(req, res) {
       }
     });
 
-    ranking.sort(function (a, b) {
-      if (a.visitCount < b.visitCount) return 1;
-      if (a.visitCount > b.visitCount) return -1;
-      return 0;
-    });
+    ranking.sort((a, b) => b.visitCount - a.visitCount)
 
     res.status(200).send(ranking);
   } catch (error) {
