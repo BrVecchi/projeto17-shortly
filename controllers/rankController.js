@@ -6,9 +6,9 @@ export async function getRanking(req, res) {
     const ranking = (await connectionDB.query(`
     SELECT u.id, u.name, SUM("visitCount") AS "visitCount", COUNT("userId") AS "linksCount"
     FROM users u
-    JOIN urls l ON u.id = l."userId"
+    LEFT JOIN urls l ON u.id = l."userId"
     GROUP BY u.id
-    ORDER BY u.id ASC;;`)).rows;
+    ORDER BY u.id ASC;`)).rows;
 
     res.status(200).send(ranking);
   } catch (error) {
